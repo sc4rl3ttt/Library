@@ -1,5 +1,5 @@
 import java.util.HashMap;
-import ecs100.*;
+import java.util.Scanner;
 /**
  * Holds a collection of books in a hashmap
  * Allows a user to add, find, print all books
@@ -37,6 +37,52 @@ public class Books
         this.currBookId = 3;    // Store the current book id number
     }
     
+    /**
+     * Set BookId
+     */
+    public void setBookId()
+    {
+        this.currBookId += 1;
+    }
+    
+    /**
+     * find book based on name
+     * set the current book instance if found
+     * @return boolean true or false
+     */
+    public boolean findBook(String name)
+    {
+        for (int bookId : library.keySet())
+        {
+            if (library.get(bookId).getName().toLowerCase().equals(name.toLowerCase()))
+            {
+                currBook = library.get(bookId);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Add a book tot the hashmap
+     */
+    public void addBook(String name, String author, int qty)
+    {
+        this.setBookId();
+        library.put(currBookId, new Book(currBookId, name, author, qty));
+    }
+
+    /**
+     * Print all books
+     */
+    public void printAll()
+    {
+        for (int bookId: library.keySet())
+        {
+            System.out.println(bookId + " Details: ");
+            System.out.println(library.get(bookId).getName() + " " + library.get(bookId).getAuthor() + library.get(bookId).getQuantity());
+        }
+    }
     
     /**
      * Menu to print all and call appropriate methods
@@ -47,36 +93,11 @@ public class Books
         String choice;
         do
         {
-            UI.println("1. (A)dd a book");
-            UI.println("2. (F)ind a book");
-            UI.println("3. (P)rint all books");
-            UI.println("4. (Q)uit");
+            System.out.println("1. (A)dd a book");
+            System.out.println("2. (F)ind a book");
+            System.out.println("3. (P)rint all books");
+            System.out.println("4. (Q)uit");
             
-            choice = UI.askString("Enter a choice");
-            
-            if (choice.equalsIgnoreCase("A"))
-            {
-                // Add book
-            }
-            else if (choice.equalsIgnoreCase("F"))
-            {
-                // Find book
-            }
-            else if (choice.equalsIgnoreCase("P"))
-            {
-                // Print all books
-            }
-            else if (choice.equalsIgnoreCase("Q"))
-            {
-                // Quit
-                UI.println("Goodbye");
-                UI.quit();
-            }
-            else
-            {
-                UI.println("Not a valid choice.");
-            }
-        }
-        while (!choice.equalsIgnoreCase("Q"));
+            choice = 
     }
 }
